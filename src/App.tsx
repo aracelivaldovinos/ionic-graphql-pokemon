@@ -21,7 +21,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink} from '@apollo/client'
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
 
 const App: React.FC = () => {
   const client = new ApolloClient({
