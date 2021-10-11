@@ -23,12 +23,19 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink} from '@apollo/client'
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: "https://dex-server.herokuapp.com/"
+  })
+return(
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home">
-          <Home />
+          <ApolloProvider client={client}>
+            <Home />
+          </ApolloProvider>
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
@@ -36,6 +43,7 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+)
+};
 
 export default App;
