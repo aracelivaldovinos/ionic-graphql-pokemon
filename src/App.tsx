@@ -26,7 +26,7 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
 const App: React.FC = () => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: "https://dex-server.herokuapp.com/"
+    uri: "https://api.spacex.land/graphql/"
   })
 return(
   <IonApp>

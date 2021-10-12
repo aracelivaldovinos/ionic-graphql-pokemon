@@ -1,26 +1,28 @@
+import { useState } from 'react';
 import {IonLabel, IonItem, IonList, IonSearchbar, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import {useQuery} from '@apollo/client'
-import {GET_POKEMON_QUERY} from '../graphql/Queries'
+import {GET_SPACEX_QUERY} from '../graphql/Queries'
 
 const Home: React.FC = () => {
-  const  {data, error} = useQuery(GET_POKEMON_QUERY,{
-    // variables: {name: "bulbasaur"}
-
+  const [searchText, setSearchText] = useState('')
+  const  {data, error} = useQuery(GET_SPACEX_QUERY,{
+    
   });
   if (error) return <h1>Error Found</h1>;
   if (data) {
     console.log(data)
   }
 
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Pokemon</IonTitle>
-          <IonSearchbar/>
-          {/* <input type="text" /> */}
-          {/* <button onClick={() => getPokemon()}>Search</button> */}
+          <IonTitle>SPACEX</IonTitle>
+          <IonSearchbar value={searchText} onIonChange={e => setSearchText}/>
+          {/* <input type="text" />
+          <button onClick={() => getPokemon()}>Search</button> */}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -28,10 +30,10 @@ const Home: React.FC = () => {
           {data &&
           <>
           
-          {data.allPokemon.map((pokemon: { name: any; }) =>
+          {data.launchesPast.map((launch: { mission_name: any; }) =>
           <IonItem>
             <IonLabel>
-              <h1>{pokemon.name}</h1>
+              <h1>{launch.mission_name}</h1>
               </IonLabel>
           </IonItem>
           )}
@@ -49,3 +51,5 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
