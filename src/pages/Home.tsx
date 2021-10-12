@@ -7,7 +7,7 @@ import {GET_SPACEX_QUERY} from '../graphql/Queries'
 const Home: React.FC = () => {
   const [searchText, setSearchText] = useState('')
   const  {data, error} = useQuery(GET_SPACEX_QUERY,{
-    
+    variables: {find: {mission_name: "Starlink"}}
   });
   if (error) return <h1>Error Found</h1>;
   if (data) {
@@ -30,10 +30,10 @@ const Home: React.FC = () => {
           {data &&
           <>
           
-          {data.launchesPast.map((launch: { mission_name: any; }) =>
+          {data.launchesPast.map((launchesPast: { mission_name: any; }) =>
           <IonItem>
             <IonLabel>
-              <h1>{launch.mission_name}</h1>
+              <h1>{launchesPast.mission_name}</h1>
               </IonLabel>
           </IonItem>
           )}

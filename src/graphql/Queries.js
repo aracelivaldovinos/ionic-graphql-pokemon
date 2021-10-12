@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const GET_SPACEX_QUERY = gql `
-query ($find: LaunchFind) {
-  launchesPast(find: $find) {
+query launchesPast ($find: Object!) {
+  launchesPast (find: $find){
     mission_name
     launch_date_local
     launch_site {
@@ -14,6 +14,15 @@ query ($find: LaunchFind) {
     }
     rocket {
       rocket_name
+      first_stage {
+        cores {
+          flight
+          core {
+            reuse_count
+            status
+          }
+        }
+      }
     }
   }
 }
