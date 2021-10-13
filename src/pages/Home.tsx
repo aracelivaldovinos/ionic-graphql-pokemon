@@ -3,8 +3,9 @@ import {IonLabel, IonItem, IonList, IonSearchbar, IonContent, IonHeader, IonPage
 import './Home.css';
 import {useQuery} from '@apollo/client'
 import {GET_SPACEX_QUERY} from '../graphql/Queries'
+import { RouteComponentProps } from 'react-router';
 
-const Home: React.FC = () => {
+const Home: React.FC<RouteComponentProps> = (props) => {
   const [searchText, setSearchText] = useState('');
   const  {data, error} = useQuery(GET_SPACEX_QUERY,{
     variables: {sort: "mission_name", find: {mission_name: searchText}}
@@ -27,8 +28,8 @@ const Home: React.FC = () => {
         <IonList>
           {data &&
           <>
-          {data.launchesPast.map((launchesPast: { mission_name: any; }) =>
-          <IonItem>
+          {data.launchesPast.map((launchesPast: { mission_name: any, id: any; }) =>
+          <IonItem onClick={() => props.history.push(`details/${launchesPast.id}`)}>
             <IonLabel>
               
               <h1>{launchesPast.mission_name}</h1>
