@@ -36,7 +36,7 @@ return(
         <Route exact path="/home">
           <ApolloProvider client={client}>
             <Route path="/home" component={Home} />
-            <Route path='/details/${launchesPast.id}' component={Details} />
+            {/* <Route path='/details/${launchesPast.id}' component={Details} /> */}
             <Redirect exact from="/" to="/home" />
           </ApolloProvider>
         </Route>
