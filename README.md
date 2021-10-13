@@ -6,7 +6,7 @@
 
 ## Technologies/Tools Used
 
-* _JXS_
+* _JSX_
 * _Ionic Framework_
 * _Graphql_
 * _Apollo Client_
