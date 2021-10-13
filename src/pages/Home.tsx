@@ -1,17 +1,15 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import {IonLabel, IonItem, IonList, IonSearchbar, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import {useQuery} from '@apollo/client'
 import {GET_SPACEX_QUERY} from '../graphql/Queries'
 
 const Home: React.FC = () => {
-  
+  const [searchText, setSearchText] = useState('');
   const  {data, error} = useQuery(GET_SPACEX_QUERY,{
-    variables: {find: {mission_name: "Starlink-15"}}
+    variables: {find: {mission_name: searchText}}, 
   });
-  if (error) {
-    console.log(error)
-  };
+  if (error) return <h1>Error found</h1>;
   if (data) {
     console.log(data)
   }
@@ -21,10 +19,8 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>SPACEX</IonTitle>
-          <IonSearchbar/>
-          {/* <input type="text" />
-          <button onClick={() => getPokemon()}>Search</button> */}
+          <IonTitle>SPACEX - Missions</IonTitle>
+          <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -56,11 +52,5 @@ const Home: React.FC = () => {
 export default Home;
 
 
-function FilterData(ev: any, any: any) {
-  throw new Error('Function not implemented.');
-}
 
-function ev(ev: any, any: any) {
-  throw new Error('Function not implemented.');
-}
 

@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const GET_SPACEX_QUERY = gql `
-query Query($find: LaunchFind) {
-  launchesPast(find: $find) {
+query Query($find: LaunchFind, $order: String) {
+  launchesPast(find: $find, order: $order) {
     mission_name
     id
     rocket {
