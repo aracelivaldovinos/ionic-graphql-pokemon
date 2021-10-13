@@ -7,13 +7,13 @@ import {GET_SPACEX_QUERY} from '../graphql/Queries'
 const Home: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const  {data, error} = useQuery(GET_SPACEX_QUERY,{
-    variables: {find: {mission_name: searchText}}, 
+    variables: {sort: "mission_name", find: {mission_name: searchText}}
+    
   });
   if (error) return <h1>Error found</h1>;
   if (data) {
     console.log(data)
   }
-
 
   return (
     <IonPage>
@@ -27,7 +27,6 @@ const Home: React.FC = () => {
         <IonList>
           {data &&
           <>
-          
           {data.launchesPast.map((launchesPast: { mission_name: any; }) =>
           <IonItem>
             <IonLabel>
